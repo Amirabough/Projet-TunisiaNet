@@ -33,5 +33,6 @@ public class RechercheOProduitStepDef {
 		RechercheProduit search=new RechercheProduit(Config.driver);
 		String actualresult=search.verifpage();
 	Assert.assertEquals(actualresult,prodReche);
+	Config.driver.quit();
 	}
 }

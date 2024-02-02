@@ -25,25 +25,10 @@ public class CommandeProduitStepDef {
 	public void user_clique_sur_le_produit(String prodname) {
 	    CommandeProduitpage produitpage=new CommandeProduitpage(Config.driver);
 	    produitpage.clicOnproduit(prodname);
+	    String actualresult= produitpage.verifProduit();
+		Assert.assertEquals(prodname, actualresult);
 	}
 
-	@Then("user est redirigr vers la page de produit {string}")
-	public void user_est_redirigr_vers_la_page_de_produit(String nameprod) {
-		 CommandeProduitpage produitpage=new CommandeProduitpage(Config.driver);
-		String actualresult= produitpage.verifProduit();
-		Assert.assertEquals(nameprod, actualresult);
-	}
-
-	@Given("user accede ala page produit {string}")
-	public void user_accede_ala_page_produit(String string) {
-		 Config.ConfigChrome();
-		   Config.maximizewindow();
-		   try {
-		   Config.navigateUrl(Utiles.getPropret("Web_LinK_produit_Commande"));
-		   }catch (Exception e) {
-			
-		}
-	}
 
 	@When("user clique sur le bouton AjoutPanier")
 	public void user_clique_sur_le_bouton_ajout_panier() {
@@ -58,16 +43,15 @@ public class CommandeProduitStepDef {
 		
 		 produitpage.commander();
 	}
-
 	
-	
-	@Then("user rediriger vers la page contenant panier du {string}")
-	public void user_rediriger_vers_la_page_contenant_panier_du(String produitNom) {
-		 CommandeProduitpage produitpage=new CommandeProduitpage(Config.driver);
-			String actualresult= produitpage.verifierPanier();
-			Assert.assertEquals(produitNom, actualresult);
+		
+	@Then("le produit est ajoute dans le panier {string}")
+	public void le_produit_est_ajoute_dans_le_panier(String produitNom) {
+		CommandeProduitpage produitpage=new CommandeProduitpage(Config.driver);
+		String actualresult= produitpage.verifierPanier();
+		Assert.assertEquals(produitNom, actualresult);
+		Config.driver.quit();
 	}
-	
 }
 
 

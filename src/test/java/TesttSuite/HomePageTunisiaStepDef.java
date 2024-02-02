@@ -39,5 +39,6 @@ public void user_est_dirigé_vers_la_page_de_submenu(String submenuN) {
 	HomePageTunisiaNetPage home=new HomePageTunisiaNetPage(Config.driver);
     String actualResult=home.verifmenu();
     Assert.assertEquals(submenuN, actualResult);
+    Config.driver.quit();
 }
 }
